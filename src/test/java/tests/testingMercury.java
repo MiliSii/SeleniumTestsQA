@@ -30,8 +30,8 @@ public class testingMercury {
     @Test(priority = 0)
     public void Title(){
         String expectedTitle = "Welcome: Mercury Tours";
-        String URL1 = "https://demo.guru99.com/test/newtours/";
-        driver.get(URL1);
+        String expectedUrl = "https://demo.guru99.com/test/newtours/";
+        driver.get(expectedUrl);
         String actualTitle = driver.getTitle(); //captures the title of the page
 
 
