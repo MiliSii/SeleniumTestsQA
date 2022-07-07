@@ -166,7 +166,7 @@ public class testingMercury {
 
     }
 
-    @Test(priority =6)
+    @Test(priority = 6)
     public void navigateToHomePage() throws InterruptedException{
         Support();
 
