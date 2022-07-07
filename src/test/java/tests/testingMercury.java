@@ -36,13 +36,12 @@ public class testingMercury {
 
 
         if (actualTitle.contentEquals(expectedTitle)) {
-            System.out.println("Test passed!");
+            System.out.println("Test passed! Title is= "+actualTitle);
         } else {
-            System.out.println("Test Failed!");
+            System.out.println("Test Failed! Title is= "+actualTitle);
         }
 
-        System.out.println(driver.getTitle());
-
+        Assert.assertEquals(actualTitle,expectedTitle);
 
     }
 
@@ -141,8 +140,10 @@ public class testingMercury {
 
     @Test(priority = 4)
     public void printUrlOfCurrentPage() {
-        String strUrl = driver.getCurrentUrl();
-        System.out.println("Current Url is:" + strUrl);
+        String actualUrl = driver.getCurrentUrl();
+        String expectedUrl="https://demo.guru99.com/test/newtours/";
+        System.out.println("Current Url is:" + actualUrl);
+        Assert.assertEquals(actualUrl, expectedUrl);
     }
 
     @Test(priority = 5)
@@ -158,10 +159,10 @@ public class testingMercury {
 
 
         if(Objects.equals(actualLink1, expectedLink1)){
-            System.out.println("Support page is open:"+expectedLink1);
+            System.out.println("Support page is open - the link is open:"+expectedLink1);
         }else{
             System.out.println("the link can be clicked, but the wrong link is opened:"+actualLink1+", the correct link should be:"+expectedLink1);}
-
+        Assert.assertEquals(actualLink1, expectedLink1);
 
     }
 
@@ -182,7 +183,7 @@ public class testingMercury {
         if(Objects.equals(actualLink,expectedUrl )){
             System.out.println("Home page is open");
         }else{System.out.println("Home page is not open");}
-
+        Assert.assertEquals(actualLink, expectedUrl);
     }
 
 
@@ -200,7 +201,7 @@ public class testingMercury {
         if(Objects.equals(actualUrl, expectedUrl)){
             System.out.println("LogOut is successfull");
         }else{System.out.println("LogOut is not successfull");}
-
+        Assert.assertEquals(actualUrl, expectedUrl);
     }
 
     @Test(priority = 8)
