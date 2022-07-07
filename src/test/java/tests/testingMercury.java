@@ -2,6 +2,8 @@ package tests;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -33,13 +35,6 @@ public class testingMercury {
         String actualTitle = driver.getTitle(); //captures the title of the page
 
 
-        /*System.out.println("Actual title is: " + actualTitle);//displays the title of the page
-        System.out.println("Expected title is: " + expectedTitle);//displays the expected page title
-        System.out.println("URL is: " + driver.getCurrentUrl());//displays the url of the page
-       // System.out.println("Source Code is: " + driver.getPageSource()); //to fetch Source Code of Webpage*/
-
-
-
         if (actualTitle.contentEquals(expectedTitle)) {
             System.out.println("Test passed!");
         } else {
@@ -61,28 +56,29 @@ public class testingMercury {
         element.sendKeys(Keys.RETURN);
 
 
-
         WebElement element1=driver.findElement(By.name("password"));
         element1.sendKeys("lozinka");
         //element1.sendKeys(Keys.RETURN);
-        System.out.println("Text Field Set");
-
+        System.out.println("Text Field and Password Field Set");
+/*
         element.clear();
         element1.clear();
-        System.out.println("Text Field Cleared");
+        System.out.println("Text Field and Ppassword Field Cleared");*/
 
         JavascriptExecutor jse1=(JavascriptExecutor) driver;
         jse1.executeScript("arguments[0].click();",driver.findElement(By.xpath("//input[@name=\"submit\"]")));
 
         Thread.sleep(2000);
-        String strUrl3 = driver.getCurrentUrl();
-        System.out.println("Current Url is:"+ strUrl3);
+        String actualUrl = driver.getCurrentUrl();
+        System.out.println("Current Url is:"+ actualUrl);
+        String expectedUrl="https://demo.guru99.com/test/newtours/login_sucess.php";
 
         Thread.sleep(2000);
-        if(Objects.equals(strUrl3, "https://demo.guru99.com/test/newtours/login_sucess.php")){
+        if(Objects.equals(actualUrl, expectedUrl)){
             System.out.println("Login Successfully");
         }else{System.out.println("Enter your userName and password correct");}
 
+        Assert.assertEquals(expectedUrl,actualUrl);
 
 
     }
@@ -128,12 +124,18 @@ public class testingMercury {
         JavascriptExecutor jse=(JavascriptExecutor) driver;
         jse.executeScript("arguments[0].click();",driver.findElement(By.linkText("Destinations")));
         Thread.sleep(2000);
-        String strUrl = driver.getCurrentUrl();
-        System.out.println("Current Url is:"+ strUrl);
-        if(Objects.equals(strUrl, "https://demo.guru99.com/test/newtours/support.php")){
-            System.out.println("link is clickable");
-        }else{System.out.println("link is clickable");}
 
+        String actualLink = driver.getCurrentUrl();
+        System.out.println("Current Url is:"+ actualLink);
+        String expectedLink = "https://demo.guru99.com/test/newtours/destinations.php";
+
+
+        if(Objects.equals(actualLink, "https://demo.guru99.com/test/newtours/destinations.php")){
+            System.out.println("link is clickable, the link is open:"+expectedLink);
+        }else{
+            System.out.println("the link can be clicked, but the wrong link is opened:"+actualLink+", the correct link should be:"+expectedLink);}
+
+        Assert.assertEquals(actualLink, expectedLink);
 
     }
 
@@ -181,8 +183,13 @@ public class testingMercury {
 
     }
 
-
-
+    @Test(priority = 7)
+    public void logout() {
+        Actions s = new Actions(driver);
+        WebElement user = driver.findElement(By.linkText("SIGN-OFF"));
+        s.moveToElement(user).build().perform();
+        driver.findElement(By.linkText("SIGN-OFF")).click();
+    }
 
 
     @AfterMethod
