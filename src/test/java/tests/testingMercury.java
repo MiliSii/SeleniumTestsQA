@@ -25,7 +25,7 @@ public class testingMercury {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @Test
+    @Test(priority = 0)
     public void Title(){
         String expectedTitle = "Welcome: Mercury Tours";
         String URL1 = "https://demo.guru99.com/test/newtours/";
