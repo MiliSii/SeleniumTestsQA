@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -205,7 +206,18 @@ public class testingMercury {
     }
 
     @Test(priority = 8)
-    public void logoutFromHomePage() {
+    public void logoutFromHomePage() throws InterruptedException {
+        Thread.sleep(2000);
+        LogIn();
+        Thread.sleep(2000);
+
+
+        JavascriptExecutor jse=(JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].click();",driver.findElement(By.linkText("Home")));
+        Thread.sleep(2000);
+        System.out.println("home page is opened "+driver.getCurrentUrl());
+        Thread.sleep(2000);
+
         Actions s = new Actions(driver);
         WebElement user = driver.findElement(By.linkText("SIGN-OFF"));
         s.moveToElement(user).build().perform();
