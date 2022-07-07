@@ -130,7 +130,7 @@ public class testingMercury {
         String expectedLink = "https://demo.guru99.com/test/newtours/destinations.php";
 
 
-        if(Objects.equals(actualLink, "https://demo.guru99.com/test/newtours/destinations.php")){
+        if(Objects.equals(actualLink, expectedLink)){
             System.out.println("link is clickable, the link is open:"+expectedLink);
         }else{
             System.out.println("the link can be clicked, but the wrong link is opened:"+actualLink+", the correct link should be:"+expectedLink);}
