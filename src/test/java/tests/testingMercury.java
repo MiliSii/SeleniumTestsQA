@@ -58,12 +58,12 @@ public class testingMercury {
 
         WebElement element1=driver.findElement(By.name("password"));
         element1.sendKeys("lozinka");
-        //element1.sendKeys(Keys.RETURN);
-        System.out.println("Text Field and Password Field Set");
-/*
-        element.clear();
+        element1.sendKeys(Keys.RETURN);
+        System.out.println("Text Field and Password Field are Set");
+
+       /*element.clear();
         element1.clear();
-        System.out.println("Text Field and Ppassword Field Cleared");*/
+        System.out.println("Text Field and Password Field Cleared");*/
 
         JavascriptExecutor jse1=(JavascriptExecutor) driver;
         jse1.executeScript("arguments[0].click();",driver.findElement(By.xpath("//input[@name=\"submit\"]")));
