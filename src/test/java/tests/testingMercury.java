@@ -25,6 +25,32 @@ public class testingMercury {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
+    @Test
+    public void Title(){
+        String expectedTitle = "Welcome: Mercury Tours";
+        String URL1 = "https://demo.guru99.com/test/newtours/";
+        driver.get(URL1);
+        String actualTitle = driver.getTitle(); //captures the title of the page
+
+
+        /*System.out.println("Actual title is: " + actualTitle);//displays the title of the page
+        System.out.println("Expected title is: " + expectedTitle);//displays the expected page title
+        System.out.println("URL is: " + driver.getCurrentUrl());//displays the url of the page
+       // System.out.println("Source Code is: " + driver.getPageSource()); //to fetch Source Code of Webpage*/
+
+
+
+        if (actualTitle.contentEquals(expectedTitle)) {
+            System.out.println("Test passed!");
+        } else {
+            System.out.println("Test Failed!");
+        }
+
+        System.out.println(driver.getTitle());
+
+
+    }
+
 
     @Test(priority = 1)
     public void LogIn() throws InterruptedException{
