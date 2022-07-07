@@ -140,34 +140,53 @@ public class testingMercury {
     }
 
     @Test(priority = 4)
-    public void printUrlOfCurrentPage(){
+    public void printUrlOfCurrentPage() {
         String strUrl = driver.getCurrentUrl();
-        System.out.println("Current Url is:"+ strUrl);
+        System.out.println("Current Url is:" + strUrl);
     }
 
-
-
     @Test(priority = 5)
-    public void navigateToHomePage() throws InterruptedException{
-        destinationLink();
-
+    public void Support() throws InterruptedException {
         Thread.sleep(2000);
-
         JavascriptExecutor jse=(JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].click();",driver.findElement(By.xpath("//img[@src=\"images/home.gif\"]")));
+        jse.executeScript("arguments[0].click();",driver.findElement(By.linkText("SUPPORT")));
+        Thread.sleep(2000);
+        String actualLink1 = driver.getCurrentUrl();
+        System.out.println("Current Url is:"+ actualLink1);
+
+        String expectedLink1 = "https://demo.guru99.com/test/newtours/support.php";
+
+
+        if(Objects.equals(actualLink1, expectedLink1)){
+            System.out.println("Support page is open:"+expectedLink1);
+        }else{
+            System.out.println("the link can be clicked, but the wrong link is opened:"+actualLink1+", the correct link should be:"+expectedLink1);}
+
+
+    }
+
+    @Test(priority =6)
+    public void navigateToHomePage() throws InterruptedException{
+        Support();
+
         Thread.sleep(2000);
 
-        String strUrl2 = driver.getCurrentUrl();
-        System.out.println("Current Url is:"+ strUrl2);
+        JavascriptExecutor jse1=(JavascriptExecutor) driver;
+        jse1.executeScript("arguments[0].click();",driver.findElement(By.xpath("//img[@src=\"images/home.gif\"]")));
         Thread.sleep(2000);
-        if(Objects.equals(strUrl2, "https://demo.guru99.com/test/newtours/index.php")){
+
+        String actualLink = driver.getCurrentUrl();
+        System.out.println("Current Url is:"+ actualLink);
+        String expectegUrl="https://demo.guru99.com/test/newtours/index.php";
+        Thread.sleep(2000);
+        if(Objects.equals(actualLink,expectegUrl )){
             System.out.println("Home page is open");
         }else{System.out.println("Home page is not open");}
 
     }
 
 
-    @Test(priority = 6)
+    @Test(priority = 7)
     public void LogOut() throws InterruptedException {
         LogIn();
         Thread.sleep(2000);
@@ -183,8 +202,8 @@ public class testingMercury {
 
     }
 
-    @Test(priority = 7)
-    public void logout() {
+    @Test(priority = 8)
+    public void logoutFromHomePage() {
         Actions s = new Actions(driver);
         WebElement user = driver.findElement(By.linkText("SIGN-OFF"));
         s.moveToElement(user).build().perform();
