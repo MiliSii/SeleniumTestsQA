@@ -177,9 +177,9 @@ public class testingMercury {
 
         String actualLink = driver.getCurrentUrl();
         System.out.println("Current Url is:"+ actualLink);
-        String expectegUrl="https://demo.guru99.com/test/newtours/index.php";
+        String expectedUrl="https://demo.guru99.com/test/newtours/index.php";
         Thread.sleep(2000);
-        if(Objects.equals(actualLink,expectegUrl )){
+        if(Objects.equals(actualLink,expectedUrl )){
             System.out.println("Home page is open");
         }else{System.out.println("Home page is not open");}
 
@@ -193,10 +193,11 @@ public class testingMercury {
         JavascriptExecutor jse=(JavascriptExecutor) driver;
         jse.executeScript("arguments[0].click();",driver.findElement(By.linkText("SIGN-OFF")));
         Thread.sleep(2000);
-        String strUrl4 = driver.getCurrentUrl();
-        System.out.println("Current Url is:"+ strUrl4);
+        String actualUrl = driver.getCurrentUrl();
+        System.out.println("Current Url is:"+ actualUrl);
+        String expectedUrl="https://demo.guru99.com/test/newtours/index.php";
         Thread.sleep(2000);
-        if(Objects.equals(strUrl4, "https://demo.guru99.com/test/newtours/index.php")){
+        if(Objects.equals(actualUrl, expectedUrl)){
             System.out.println("LogOut is successfull");
         }else{System.out.println("LogOut is not successfull");}
 
