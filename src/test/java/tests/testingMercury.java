@@ -7,7 +7,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -223,11 +230,74 @@ public class testingMercury {
         driver.findElement(By.linkText("SIGN-OFF")).click();
     }
 
+    @Test(priority = 9)
+    public void BrokenLinks(){
+        String homePage = "https://demo.guru99.com/test/newtours/index.php";
+        String url = "";
+        HttpURLConnection huc = null;
+        int respCode = 200;
+
+
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+
+        Iterator<WebElement> it = links.iterator();
+
+        while(it.hasNext()){
+
+            url = it.next().getAttribute("href");
+
+            System.out.println(url);
+
+            if(url == null || url.isEmpty()){
+                System.out.println("URL is either not configured for anchor tag or it is empty");
+                continue;
+            }
+
+            if(!url.startsWith(homePage)){
+                System.out.println("URL belongs to another domain, skipping it.");
+                continue;
+            }
+
+            try {
+                huc = (HttpURLConnection)(new URL(url).openConnection());
+
+                huc.setRequestMethod("HEAD");
+
+                huc.connect();
+
+                respCode = huc.getResponseCode();
+
+                if(respCode >= 400){
+                    System.out.println(url+" is a broken link");
+                }
+                else{
+                    System.out.println(url+" is a valid link");
+                }
+
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+    @Test(priority = 10)
+    public void SourceCodedispley(){
+
+        System.out.println("URL is: " + driver.getCurrentUrl());//displays the url of the page
+        System.out.println("Source Code is: " + driver.getPageSource()); //to fetch Source Code of Webpage
+    }
+
+
 
     @AfterMethod
     public void tearDown() {
         driver.quit();
-
     }
 
 
