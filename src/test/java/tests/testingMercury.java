@@ -35,7 +35,7 @@ public class testingMercury {
     }
 
     @Test(priority = 0)
-    public void Title(){
+    public void verifyTitle(){
         String expectedTitle = "Welcome: Mercury Tours";
         String expectedUrl = "https://demo.guru99.com/test/newtours/";
         driver.get(expectedUrl);
@@ -54,7 +54,7 @@ public class testingMercury {
 
 
     @Test(priority = 1)
-    public void LogIn() throws InterruptedException{
+    public void verifyLogIn_ValidUser() throws InterruptedException{
 
         Thread.sleep(2000);
         WebElement element=driver.findElement(By.name("userName"));
@@ -124,7 +124,7 @@ public class testingMercury {
 
     }
     @Test(priority = 3)
-    public void destinationLink() throws InterruptedException{
+    public void navigateToDestinationLink() throws InterruptedException{
         Thread.sleep(2000);
 
         JavascriptExecutor jse=(JavascriptExecutor) driver;
@@ -154,7 +154,7 @@ public class testingMercury {
     }
 
     @Test(priority = 5)
-    public void Support() throws InterruptedException {
+    public void navigateToSupport() throws InterruptedException {
         Thread.sleep(2000);
         JavascriptExecutor jse=(JavascriptExecutor) driver;
         jse.executeScript("arguments[0].click();",driver.findElement(By.linkText("SUPPORT")));
@@ -175,7 +175,7 @@ public class testingMercury {
 
     @Test(priority = 6)
     public void navigateToHomePage() throws InterruptedException{
-        Support();
+        navigateToSupport();
 
         Thread.sleep(2000);
 
@@ -196,7 +196,7 @@ public class testingMercury {
 
     @Test(priority = 7)
     public void LogOut() throws InterruptedException {
-        LogIn();
+        verifyLogIn_ValidUser();
         Thread.sleep(2000);
         JavascriptExecutor jse=(JavascriptExecutor) driver;
         jse.executeScript("arguments[0].click();",driver.findElement(By.linkText("SIGN-OFF")));
@@ -214,7 +214,7 @@ public class testingMercury {
     @Test(priority = 8)
     public void logoutFromHomePage() throws InterruptedException {
         Thread.sleep(2000);
-        LogIn();
+        verifyLogIn_ValidUser();
         Thread.sleep(2000);
 
 
@@ -230,7 +230,15 @@ public class testingMercury {
         driver.findElement(By.linkText("SIGN-OFF")).click();
     }
 
+
     @Test(priority = 9)
+    public void SourceCodeDispley(){
+
+        System.out.println("URL is: " + driver.getCurrentUrl());//displays the url of the page
+        System.out.println("Source Code is: " + driver.getPageSource()); //to fetch Source Code of Webpage
+    }
+
+    @Test(priority = 10)
     public void BrokenLinks(){
         String homePage = "https://demo.guru99.com/test/newtours/index.php";
         String url = "";
@@ -286,12 +294,7 @@ public class testingMercury {
     }
 
 
-    @Test(priority = 10)
-    public void SourceCodedispley(){
 
-        System.out.println("URL is: " + driver.getCurrentUrl());//displays the url of the page
-        System.out.println("Source Code is: " + driver.getPageSource()); //to fetch Source Code of Webpage
-    }
 
 
 
